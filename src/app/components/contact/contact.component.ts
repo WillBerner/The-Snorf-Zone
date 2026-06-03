@@ -30,14 +30,14 @@ export class ContactComponent {
 
     try {
       await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        'service_t41wuua',
+        'template_zg25jo7',
         {
           from_name: this.contactForm.value.name,
           reply_to: this.contactForm.value.email,
           message: this.contactForm.value.message
         },
-        'YOUR_PUBLIC_KEY'
+        'mhYYK-GTia4KMXKPZ'
       );
       this.feedback = 'success';
       this.contactForm.reset();
