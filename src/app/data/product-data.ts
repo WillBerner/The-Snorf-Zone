@@ -12,9 +12,9 @@ export const PRODUCTS: Product[] = [
   {
     id: 'bubble-boy',
     title: 'Bubble Boy',
-    price: 28.0,
+    price: 60.0,
     description: 'A sailor-inspired plushie with embroidered accents and a soft, collectible finish.',
-    details: 'Handmade from premium plush fabric with custom embroidery. Each Bubble Boy is packaged safely for delivery.',
+    details: 'This funny little guy is 16cm tall and handmade with soft minky. His hat is even removable (but don\'t take it away from him, he likes it!) Buyers can choose from a plush with an embroidered face, a regular plush with a printed face, or a discounted plush with a slight color variation. Please allow 1-2 weeks for shipping; domestic shipping time is usually under one week while International shipping times can vary. NOTE: This product was made in a household with dogs. Also, as these are handmade, they may not be identical to the one pictured.',
     hero: 'assets/images/bubble-boy/Bubble-Boy-1.jpg',
     images: [
       'assets/images/bubble-boy/Bubble-Boy-1.jpg',
@@ -28,9 +28,9 @@ export const PRODUCTS: Product[] = [
   {
     id: 'dino-boy',
     title: 'Dino Boy',
-    price: 32.0,
+    price: 65.0,
     description: 'A freckled dinosaur-themed plush with a whimsical adventure-ready hat.',
-    details: 'Each Dino Boy plush is sewn with personality and vibrant details, perfect for display or gifting.',
+    details: 'This dino cowboy plushie is 16cm tall and made of lovely, soft minky. His cap is removeable, and his tail is magnetic! Won\'t you accept this little menace into your home? He can\'t WAIT to chew on your furniture! This plush can either come with an embroidered face or a regular printed face. Please allow 1-2 weeks for shipping; domestic shipping time is usually under one week while International shipping times can vary. NOTE: This product was made in a household with dogs. Also, as these are handmade, they may not be identical to the one pictured.',
     hero: 'assets/images/dino-boy/Dino-Boy-1.jpg',
     images: [
       'assets/images/dino-boy/Dino-Boy-1.jpg',
@@ -44,9 +44,9 @@ export const PRODUCTS: Product[] = [
   {
     id: 'rose-girl',
     title: 'Rose Girl',
-    price: 30.0,
+    price: 60.0,
     description: 'A rosy plush with botanical details and bright pink hair for a bold collector display.',
-    details: 'Rose Girl features soft felt petals and embroidered accents made with care for each order.',
+    details: 'No matter what, this rosy girl will find her way! 16cm tall and handmade with soft minky, buyers can choose from a plush with an embroidered face or a printed face. Please allow 1-2 weeks for shipping; domestic shipping time is usually under one week while International shipping times can vary. NOTE: This product was made in a household with dogs. Also, as these are handmade, they may not be identical to the one pictured. ',
     hero: 'assets/images/rose-girl/Rose-Girl-1.jpg',
     images: [
       'assets/images/rose-girl/Rose-Girl-1.jpg',
@@ -59,9 +59,9 @@ export const PRODUCTS: Product[] = [
   {
     id: 'stone-man',
     title: 'Stone Man',
-    price: 34.0,
+    price: 60.0,
     description: 'A stone-inspired plushie with rich earth tones and a bold collector presence.',
-    details: 'Stone Man is handcrafted with attention to rugged texture and decorative accents.',
+    details: 'The mysterious stone man has awakened... And he\'s adorable! This handmade little guy is 16cm tall with soft minky skin and felt hair. Buyers can choose from a plush with an embroidered face or a regular plush with a printed face. Please allow 1-2 weeks for shipping; domestic shipping time is usually under one week while International shipping times can vary. NOTE: This product was made in a household with dogs. Also, as these are handmade, they may not be identical to the one pictured. ',
     hero: 'assets/images/stone-man/Stone-Man-1.jpg',
     images: [
       'assets/images/stone-man/Stone-Man-1.jpg',
@@ -75,9 +75,9 @@ export const PRODUCTS: Product[] = [
   {
     id: 'wind-warrior',
     title: 'Wind Warrior',
-    price: 35.0,
+    price: 60.0,
     description: 'A skybound warrior plush with flowing details and a custom embroidered tail.',
-    details: 'Wind Warrior is made with unique applique and plush fabric for an eye-catching collectible.',
+    details: 'Don\'t let his size fool you—this fearsome warrior has never been defeated! If you\'re not careful, he might just put a wedding ring (of death) around your heart <3. Handmade of soft minky and felt, this little guy is about 16cm tall. Buyers can choose from a plush with an embroidered face or a printed face. Please allow 1-2 weeks for shipping; domestic shipping time is usually under one week while International shipping times can vary. NOTE: This product was made in a household with dogs. Also, as these are handmade, they may not be identical to the one pictured.',
     hero: 'assets/images/wind-warrior/Wind-Warrior-1.jpg',
     images: [
       'assets/images/wind-warrior/Wind-Warrior-1.jpg',
