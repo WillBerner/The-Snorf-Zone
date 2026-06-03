@@ -2,8 +2,14 @@ import { computed, Injectable, signal } from '@angular/core';
 import { Product } from '../data/product-data';
 
 export interface CartItem {
+  id: string;
   product: Product;
   quantity: number;
+  embroidered: boolean;
+}
+
+function createCartItemId(product: Product, embroidered: boolean) {
+  return `${product.id}:${embroidered ? 'embroidered' : 'printed'}`;
 }
 
 @Injectable({
@@ -15,35 +21,37 @@ export class CartService {
   readonly totalItems = computed(() => this.items().reduce((count, item) => count + item.quantity, 0));
   readonly totalPrice = computed(() => this.items().reduce((total, item) => total + item.product.price * item.quantity, 0));
 
-  add(product: Product) {
-    const existing = this.items().find((item) => item.product.id === product.id);
+  add(product: Product, embroidered: boolean) {
+    const id = createCartItemId(product, embroidered);
+    const existing = this.items().find((item) => item.id === id);
+
     if (existing) {
       this.items.update((items) =>
         items.map((item) =>
-          item.product.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === id ? { ...item, quantity: item.quantity + 1 } : item
         )
       );
       return;
     }
 
-    this.items.update((items) => [...items, { product, quantity: 1 }]);
+    this.items.update((items) => [...items, { id, product, quantity: 1, embroidered }]);
   }
 
-  updateQuantity(productId: string, quantity: number) {
+  updateQuantity(itemId: string, quantity: number) {
     if (quantity <= 0) {
-      this.remove(productId);
+      this.remove(itemId);
       return;
     }
 
     this.items.update((items) =>
       items.map((item) =>
-        item.product.id === productId ? { ...item, quantity } : item
+        item.id === itemId ? { ...item, quantity } : item
       )
     );
   }
 
-  remove(productId: string) {
-    this.items.update((items) => items.filter((item) => item.product.id !== productId));
+  remove(itemId: string) {
+    this.items.update((items) => items.filter((item) => item.id !== itemId));
   }
 
   clear() {

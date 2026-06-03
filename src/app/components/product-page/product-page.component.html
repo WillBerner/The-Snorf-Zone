@@ -8,7 +8,32 @@
       <h1>{{ product.title }}</h1>
       <p class="price">$ {{ product.price.toFixed(2) }}</p>
       <p class="description">{{ product.description }}</p>
-      <p class="details">{{ product.details }}</p>
+      <p class="details">{{ detailsText() }}</p>
+      <div class="embroidered-option">
+        <p class="option-label">Embroidered</p>
+        <div class="option-buttons" role="radiogroup" aria-label="Embroidered option">
+          <button
+            type="button"
+            class="option-button"
+            [class.active]="embroidered()"
+            [attr.aria-checked]="embroidered()"
+            role="radio"
+            (click)="setEmbroidered(true)">
+            Yes
+          </button>
+          <button
+            type="button"
+            class="option-button"
+            [class.active]="!embroidered()"
+            [attr.aria-checked]="!embroidered()"
+            role="radio"
+            (click)="setEmbroidered(false)">
+            No
+          </button>
+        </div>
+      </div>
+      <p class="details-note" *ngIf="noteText()">{{ noteText() }}</p>
+      <p class="email-note">{{ contactNote }}</p>
       <button type="button" class="primary-button" (click)="addToCart()">Add to cart</button>
       <a routerLink="/cart" class="secondary-link">View cart</a>
     </div>

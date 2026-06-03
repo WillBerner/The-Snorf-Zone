@@ -18,12 +18,12 @@ export class CartComponent {
   readonly totalPrice = this.cartService.totalPrice;
   checkoutMessage = '';
 
-  updateQuantity(productId: string, quantity: number) {
-    this.cartService.updateQuantity(productId, quantity);
+  updateQuantity(itemId: string, quantity: number) {
+    this.cartService.updateQuantity(itemId, quantity);
   }
 
-  remove(productId: string) {
-    this.cartService.remove(productId);
+  remove(itemId: string) {
+    this.cartService.remove(itemId);
   }
 
   async checkout() {
@@ -33,7 +33,25 @@ export class CartComponent {
         this.checkoutMessage = 'Unable to load Stripe.';
         return;
       }
-      this.checkoutMessage = 'Stripe is loaded. Add real checkout next.';
+
+      const items = this.cartService.items$();
+      const lineItems = items.map((item) => ({
+        title: item.product.title,
+        embroidered: item.embroidered,
+        quantity: item.quantity,
+        unit_price: item.product.price,
+        description: `${item.product.title} (${item.embroidered ? 'Embroidered' : 'Printed'})`
+      }));
+
+      console.log('Stripe checkout payload placeholder:', {
+        lineItems,
+        metadata: items.map((item) => ({
+          productId: item.product.id,
+          embroidered: item.embroidered
+        }))
+      });
+
+      this.checkoutMessage = 'Stripe is loaded. Checkout payload has been logged to console. Replace this placeholder with a real server-side Stripe session creation flow.';
     } catch (error) {
       console.error(error);
       this.checkoutMessage = 'Checkout is not available at the moment.';

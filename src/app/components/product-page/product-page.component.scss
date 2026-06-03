@@ -49,6 +49,52 @@
   color: #4a4561;
 }
 
+.embroidered-option {
+  margin-bottom: 1rem;
+}
+
+.option-label {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  color: #1e143f;
+}
+
+.option-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.option-button {
+  border: 1px solid #c5b8ff;
+  border-radius: 999px;
+  padding: 0.85rem 1rem;
+  background: #f7f2ff;
+  color: #3c2f70;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.option-button.active {
+  border-color: #4b2fff;
+  background: #4b2fff;
+  color: #ffffff;
+}
+
+.details-note,
+.email-note {
+  margin: 1rem 0 0;
+  line-height: 1.75;
+}
+
+.details-note {
+  font-weight: 600;
+}
+
+.email-note {
+  color: #4b2fff;
+}
+
 .primary-button,
 .secondary-link {
   display: inline-flex;
