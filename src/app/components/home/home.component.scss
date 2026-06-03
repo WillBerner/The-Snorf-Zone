@@ -1,0 +1,123 @@
+.hero-panel {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  background: linear-gradient(180deg, #f8f0ff 0%, #e9e2ff 100%);
+  border-radius: 32px;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-copy {
+  max-width: 44rem;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #7f61ff;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero-panel h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 4vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+  color: #120a2b;
+}
+
+.hero-text {
+  margin: 1.25rem 0 2rem;
+  max-width: 38rem;
+  line-height: 1.8;
+  color: #312e45;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.6rem;
+  background: #4b2fff;
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 14px 40px rgba(75, 47, 255, 0.18);
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 26px;
+  object-fit: cover;
+  height: min(520px, 100%);
+}
+
+.section-heading h2 {
+  margin: 0 0 1.5rem;
+  font-size: 2rem;
+  color: #120a2b;
+}
+
+.product-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.product-card {
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 16px 40px rgba(17, 11, 43, 0.05);
+  overflow: hidden;
+}
+
+.product-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.product-copy {
+  padding: 1.35rem 1.35rem 1.5rem;
+}
+
+.product-copy strong {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.product-copy p {
+  margin: 0 0 1.35rem;
+  color: #5b5478;
+}
+
+.product-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.product-link {
+  color: #4b2fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (max-width: 920px) {
+  .hero-panel {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-image {
+    order: -1;
+  }
+}

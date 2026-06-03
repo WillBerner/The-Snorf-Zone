@@ -1,0 +1,27 @@
+<section class="contact-page">
+  <div class="contact-copy">
+    <p class="eyebrow">Get in touch</p>
+    <h1>Send your message</h1>
+    <p>Fill out the form and I’ll receive your order question or custom request via EmailJS.</p>
+  </div>
+
+  <form [formGroup]="contactForm" (ngSubmit)="sendMessage()" class="contact-form">
+    <label>
+      Name
+      <input formControlName="name" placeholder="Your name" />
+    </label>
+    <label>
+      Email
+      <input formControlName="email" placeholder="you@example.com" type="email" />
+    </label>
+    <label>
+      Message
+      <textarea formControlName="message" rows="6" placeholder="What would you like to say?"></textarea>
+    </label>
+
+    <button type="submit" [disabled]="contactForm.invalid || sending">Send message</button>
+
+    <p class="status success" *ngIf="feedback === 'success'">Message sent! Replace the placeholders with your EmailJS IDs.</p>
+    <p class="status error" *ngIf="feedback === 'error'">Unable to send. Please configure EmailJS service, template, and public key.</p>
+  </form>
+</section>

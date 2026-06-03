@@ -20,10 +20,16 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "baseHref": "/The-Snorf-Zone/",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
+              },
               {
                 "glob": "**/*",
                 "input": "public"

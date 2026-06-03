@@ -1,0 +1,30 @@
+<section *ngIf="product; else missing" class="product-page">
+  <div class="product-hero">
+    <div class="product-images">
+      <img [ngSrc]="product.hero" width="900" height="720" [alt]="product.title + ' main photo'" />
+    </div>
+    <div class="product-summary">
+      <p class="eyebrow">Limited edition plush</p>
+      <h1>{{ product.title }}</h1>
+      <p class="price">$ {{ product.price.toFixed(2) }}</p>
+      <p class="description">{{ product.description }}</p>
+      <p class="details">{{ product.details }}</p>
+      <button type="button" class="primary-button" (click)="addToCart()">Add to cart</button>
+      <a routerLink="/cart" class="secondary-link">View cart</a>
+    </div>
+  </div>
+
+  <section class="gallery-section">
+    <h2>More photos</h2>
+    <div class="gallery-grid">
+      <img *ngFor="let image of product.images" [ngSrc]="image" width="520" height="420" [alt]="product.title + ' photo'" />
+    </div>
+  </section>
+</section>
+
+<ng-template #missing>
+  <div class="missing-content">
+    <h2>Product not found</h2>
+    <p>We could not find that product. Return to the <a routerLink="/plushies">plushies page</a>.</p>
+  </div>
+</ng-template>

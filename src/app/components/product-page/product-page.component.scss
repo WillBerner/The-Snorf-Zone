@@ -1,0 +1,102 @@
+.product-page {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.product-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.product-images img {
+  width: 100%;
+  border-radius: 28px;
+  object-fit: cover;
+}
+
+.product-summary {
+  padding: 1rem 0;
+}
+
+.product-summary .eyebrow {
+  margin: 0 0 1rem;
+  color: #7f61ff;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.product-summary h1 {
+  margin: 0;
+  font-size: 3rem;
+  line-height: 1.02;
+  color: #120a2b;
+}
+
+.price {
+  margin: 1rem 0;
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #4b2fff;
+}
+
+.description,
+.details {
+  margin: 1rem 0;
+  line-height: 1.8;
+  color: #4a4561;
+}
+
+.primary-button,
+.secondary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.primary-button {
+  border: none;
+  padding: 1rem 1.6rem;
+  background: #4b2fff;
+  color: white;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.secondary-link {
+  color: #4b2fff;
+  text-decoration: none;
+}
+
+.gallery-section h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.85rem;
+}
+
+.gallery-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.gallery-grid img {
+  width: 100%;
+  min-height: 220px;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+.missing-content {
+  padding: 3rem 2rem;
+  background: #fff;
+  border-radius: 26px;
+  box-shadow: 0 16px 40px rgba(17, 11, 43, 0.05);
+}
+
+.missing-content h2 {
+  margin: 0 0 1rem;
+}
