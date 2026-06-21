@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { loadStripe } from '@stripe/stripe-js';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -17,6 +16,7 @@ export class CartComponent {
   readonly totalItems = this.cartService.totalItems;
   readonly totalPrice = this.cartService.totalPrice;
   checkoutMessage = '';
+  isLoading = false;
 
   updateQuantity(itemId: string, quantity: number) {
     this.cartService.updateQuantity(itemId, quantity);
@@ -27,13 +27,8 @@ export class CartComponent {
   }
 
   async checkout() {
+    this.isLoading = true;
     try {
-      const stripe = await loadStripe('pk_test_REPLACE_WITH_YOUR_PUBLIC_KEY');
-      if (!stripe) {
-        this.checkoutMessage = 'Unable to load Stripe.';
-        return;
-      }
-
       const items = this.cartService.items$();
       const lineItems = items.map((item) => ({
         title: item.product.title,
@@ -43,18 +38,26 @@ export class CartComponent {
         description: `${item.product.title} (${item.embroidered ? 'Embroidered' : 'Printed'})`
       }));
 
-      console.log('Stripe checkout payload placeholder:', {
-        lineItems,
-        metadata: items.map((item) => ({
-          productId: item.product.id,
-          embroidered: item.embroidered
-        }))
+      // Call your backend
+      const response = await fetch('https://snorf-zone-backend.onrender.com/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lineItems })
       });
 
-      this.checkoutMessage = 'Stripe is loaded. Checkout payload has been logged to console. Replace this placeholder with a real server-side Stripe session creation flow.';
-    } catch (error) {
+      const data = await response.json();
+
+      if (data.sessionUrl) {
+        // Redirect to Stripe hosted checkout
+        window.location.href = data.sessionUrl;
+      } else {
+        this.checkoutMessage = data.error || 'Failed to initiate checkout.';
+      }
+    } catch (error: any) {
       console.error(error);
-      this.checkoutMessage = 'Checkout is not available at the moment.';
+      this.checkoutMessage = 'Error initiating checkout. Please try again.';
+    } finally {
+      this.isLoading = false;
     }
   }
 }
