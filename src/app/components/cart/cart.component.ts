@@ -34,7 +34,7 @@ export class CartComponent {
         title: item.product.title,
         embroidered: item.embroidered,
         quantity: item.quantity,
-        unit_price: item.product.price,
+        unit_price: item.embroidered ? item.product.price : Math.max(item.product.price - 10, 0),
         description: `${item.product.title} (${item.embroidered ? 'Embroidered' : 'Printed'})`
       }));
 

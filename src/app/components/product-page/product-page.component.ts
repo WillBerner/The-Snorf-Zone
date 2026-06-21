@@ -17,6 +17,12 @@ export class ProductPageComponent {
 
   readonly product = findProduct(this.route.snapshot.paramMap.get('id') ?? '');
   readonly embroidered = signal(true);
+  readonly selectedPrice = computed(() => {
+    if (!this.product) {
+      return 0;
+    }
+    return this.embroidered() ? this.product.price : Math.max(this.product.price - 10, 0);
+  });
 
   readonly detailsText = computed(() => {
     const details = this.product?.details ?? '';

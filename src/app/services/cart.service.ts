@@ -12,6 +12,10 @@ function createCartItemId(product: Product, embroidered: boolean) {
   return `${product.id}:${embroidered ? 'embroidered' : 'printed'}`;
 }
 
+function getCartItemUnitPrice(item: CartItem) {
+  return item.embroidered ? item.product.price : Math.max(item.product.price - 10, 0);
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +23,9 @@ export class CartService {
   private items = signal<CartItem[]>([]);
   readonly items$ = this.items.asReadonly();
   readonly totalItems = computed(() => this.items().reduce((count, item) => count + item.quantity, 0));
-  readonly totalPrice = computed(() => this.items().reduce((total, item) => total + item.product.price * item.quantity, 0));
+  readonly totalPrice = computed(() =>
+    this.items().reduce((total, item) => total + getCartItemUnitPrice(item) * item.quantity, 0)
+  );
 
   add(product: Product, embroidered: boolean) {
     const id = createCartItemId(product, embroidered);
