@@ -1,14 +1,13 @@
 <section class="contact-page">
   <div class="contact-copy">
-    <p class="eyebrow">Get in touch</p>
-    <h1>Send your message</h1>
-    <p>Fill out the form and I’ll receive your order question or custom request via EmailJS.</p>
+    <h1 class="eyebrow">Get in touch</h1>
+    <p>Feel free to reach out with any questions about orders or custom requests!</p>
   </div>
 
   <form [formGroup]="contactForm" (ngSubmit)="sendMessage()" class="contact-form">
     <label>
       Name
-      <input formControlName="name" placeholder="Your name" />
+      <input formControlName="name" />
     </label>
     <label>
       Email
@@ -16,7 +15,7 @@
     </label>
     <label>
       Message
-      <textarea formControlName="message" rows="6" placeholder="What would you like to say?"></textarea>
+      <textarea formControlName="message" rows="6" placeholder="What can I help you with?"></textarea>
     </label>
 
     <button type="submit" [disabled]="contactForm.invalid || sending">Send message</button>

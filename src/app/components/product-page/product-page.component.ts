@@ -42,9 +42,7 @@ export class ProductPageComponent {
     const noteIndex = details.indexOf('NOTE:');
     return noteIndex === -1 ? '' : details.slice(noteIndex).trim();
   });
-
-  readonly contactNote = 'If you have any questions or concerns, please email me at evethelesbianfrog@gmail.com!';
-
+  
   setOption(option: CartOption) {
     this.selectedOption.set(option);
   }
