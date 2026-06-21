@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { CartService, CartOption } from '../../services/cart.service';
 import { findProduct } from '../../data/product-data';
@@ -13,6 +13,7 @@ import { findProduct } from '../../data/product-data';
 })
 export class ProductPageComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly cartService = inject(CartService);
 
   readonly product = findProduct(this.route.snapshot.paramMap.get('id') ?? '');
@@ -51,6 +52,7 @@ export class ProductPageComponent {
   addToCart() {
     if (this.product) {
       this.cartService.add(this.product, this.selectedOption());
+      this.router.navigate(['/cart']);
     }
   }
 }
