@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page not found</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <p>Loading application...</p>
+  <script>
+    const path = window.location.pathname;
+    const firstSegment = path.split('/').filter(Boolean)[0] || '';
+    const indexPaths = ['/index.html'];
+
+    if (firstSegment) {
+      indexPaths.push(`/${firstSegment}/index.html`);
+    }
+
+    function loadIndex(path) {
+      return fetch(path).then((response) => {
+        if (!response.ok) {
+          throw new Error('Index not found');
+        }
+        return response.text();
+      });
+    }
+
+    (async () => {
+      for (const indexPath of indexPaths) {
+        try {
+          const html = await loadIndex(indexPath);
+          document.open();
+          document.write(html);
+          document.close();
+          return;
+        } catch {
+          // try next path
+        }
+      }
+      document.body.innerHTML = '<p>Unable to load the app. Please go back to the home page.</p>';
+    })();
+  </script>
+</body>
+</html>
