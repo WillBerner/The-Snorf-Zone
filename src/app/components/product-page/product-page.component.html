@@ -10,25 +10,35 @@
       <p class="description">{{ product.description }}</p>
       <p class="details">{{ detailsText() }}</p>
       <div class="embroidered-option">
-        <p class="option-label">Embroidered</p>
-        <div class="option-buttons" role="radiogroup" aria-label="Embroidered option">
+        <p class="option-label">Product option</p>
+        <div class="option-buttons" role="radiogroup" aria-label="Product options">
           <button
             type="button"
             class="option-button"
-            [class.active]="embroidered()"
-            [attr.aria-checked]="embroidered()"
+            [class.active]="selectedOption() === 'embroidered'"
+            [attr.aria-checked]="selectedOption() === 'embroidered'"
             role="radio"
-            (click)="setEmbroidered(true)">
-            Yes
+            (click)="setOption('embroidered')">
+            Embroidered
           </button>
           <button
             type="button"
             class="option-button"
-            [class.active]="!embroidered()"
-            [attr.aria-checked]="!embroidered()"
+            [class.active]="selectedOption() === 'printed'"
+            [attr.aria-checked]="selectedOption() === 'printed'"
             role="radio"
-            (click)="setEmbroidered(false)">
-            No
+            (click)="setOption('printed')">
+            Printed
+          </button>
+          <button
+            *ngIf="showColorFlaw()"
+            type="button"
+            class="option-button"
+            [class.active]="selectedOption() === 'color-flaw'"
+            [attr.aria-checked]="selectedOption() === 'color-flaw'"
+            role="radio"
+            (click)="setOption('color-flaw')">
+            Color flaw
           </button>
         </div>
       </div>

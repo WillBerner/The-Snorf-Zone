@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { CartService } from '../../services/cart.service';
+import { CartService, CartOption } from '../../services/cart.service';
 
 @Component({
   standalone: true,
@@ -32,10 +32,15 @@ export class CartComponent {
       const items = this.cartService.items$();
       const lineItems = items.map((item) => ({
         title: item.product.title,
-        embroidered: item.embroidered,
+        option: item.option,
         quantity: item.quantity,
-        unit_price: item.embroidered ? item.product.price : Math.max(item.product.price - 10, 0),
-        description: `${item.product.title} (${item.embroidered ? 'Embroidered' : 'Printed'})`
+        unit_price:
+          item.option === 'embroidered'
+            ? item.product.price
+            : item.option === 'printed'
+            ? Math.max(item.product.price - 10, 0)
+            : Math.max(item.product.price - 20, 0),
+        description: `${item.product.title} (${item.option === 'embroidered' ? 'Embroidered' : item.option === 'printed' ? 'Printed' : 'Color flaw'})`
       }));
 
       // Call backend

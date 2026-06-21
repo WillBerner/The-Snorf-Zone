@@ -1,19 +1,27 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Product } from '../data/product-data';
 
+export type CartOption = 'embroidered' | 'printed' | 'color-flaw';
+
 export interface CartItem {
   id: string;
   product: Product;
   quantity: number;
-  embroidered: boolean;
+  option: CartOption;
 }
 
-function createCartItemId(product: Product, embroidered: boolean) {
-  return `${product.id}:${embroidered ? 'embroidered' : 'printed'}`;
+function createCartItemId(product: Product, option: CartOption) {
+  return `${product.id}:${option}`;
 }
 
 function getCartItemUnitPrice(item: CartItem) {
-  return item.embroidered ? item.product.price : Math.max(item.product.price - 10, 0);
+  if (item.option === 'embroidered') {
+    return item.product.price;
+  }
+  if (item.option === 'printed') {
+    return Math.max(item.product.price - 10, 0);
+  }
+  return Math.max(item.product.price - 20, 0);
 }
 
 @Injectable({
@@ -27,8 +35,8 @@ export class CartService {
     this.items().reduce((total, item) => total + getCartItemUnitPrice(item) * item.quantity, 0)
   );
 
-  add(product: Product, embroidered: boolean) {
-    const id = createCartItemId(product, embroidered);
+  add(product: Product, option: CartOption) {
+    const id = createCartItemId(product, option);
     const existing = this.items().find((item) => item.id === id);
 
     if (existing) {
@@ -40,7 +48,7 @@ export class CartService {
       return;
     }
 
-    this.items.update((items) => [...items, { id, product, quantity: 1, embroidered }]);
+    this.items.update((items) => [...items, { id, product, quantity: 1, option }]);
   }
 
   updateQuantity(itemId: string, quantity: number) {

@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { CartService } from '../../services/cart.service';
+import { CartService, CartOption } from '../../services/cart.service';
 import { findProduct } from '../../data/product-data';
 
 @Component({
@@ -16,12 +16,18 @@ export class ProductPageComponent {
   private readonly cartService = inject(CartService);
 
   readonly product = findProduct(this.route.snapshot.paramMap.get('id') ?? '');
-  readonly embroidered = signal(true);
+  readonly selectedOption = signal<CartOption>('embroidered');
+  readonly showColorFlaw = computed(() => this.product?.id === 'bubble-boy');
   readonly selectedPrice = computed(() => {
     if (!this.product) {
       return 0;
     }
-    return this.embroidered() ? this.product.price : Math.max(this.product.price - 10, 0);
+    const option = this.selectedOption();
+    return option === 'embroidered'
+      ? this.product.price
+      : option === 'printed'
+      ? Math.max(this.product.price - 10, 0)
+      : Math.max(this.product.price - 20, 0);
   });
 
   readonly detailsText = computed(() => {
@@ -38,13 +44,13 @@ export class ProductPageComponent {
 
   readonly contactNote = 'If you have any questions or concerns, please email me at evethelesbianfrog@gmail.com!';
 
-  setEmbroidered(value: boolean) {
-    this.embroidered.set(value);
+  setOption(option: CartOption) {
+    this.selectedOption.set(option);
   }
 
   addToCart() {
     if (this.product) {
-      this.cartService.add(this.product, this.embroidered());
+      this.cartService.add(this.product, this.selectedOption());
     }
   }
 }
