@@ -1,7 +1,13 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { Product } from '../data/product-data';
+import { Product, findProduct } from '../data/product-data';
 
 export type CartOption = 'embroidered' | 'printed' | 'color-flaw';
+
+interface StoredCartItem {
+  productId: string;
+  option: CartOption;
+  quantity: number;
+}
 
 export interface CartItem {
   id: string;
@@ -35,6 +41,10 @@ export class CartService {
     this.items().reduce((total, item) => total + getCartItemUnitPrice(item) * item.quantity, 0)
   );
 
+  constructor() {
+    this.restoreCart();
+  }
+
   add(product: Product, option: CartOption) {
     const id = createCartItemId(product, option);
     const existing = this.items().find((item) => item.id === id);
@@ -45,10 +55,15 @@ export class CartService {
           item.id === id ? { ...item, quantity: item.quantity + 1 } : item
         )
       );
+      this.saveCart();
       return;
     }
 
-    this.items.update((items) => [...items, { id, product, quantity: 1, option }]);
+    this.items.update((items) => {
+      const updated = [...items, { id, product, quantity: 1, option }];
+      return updated;
+    });
+    this.saveCart();
   }
 
   updateQuantity(itemId: string, quantity: number) {
@@ -62,13 +77,57 @@ export class CartService {
         item.id === itemId ? { ...item, quantity } : item
       )
     );
+    this.saveCart();
   }
 
   remove(itemId: string) {
     this.items.update((items) => items.filter((item) => item.id !== itemId));
+    this.saveCart();
   }
 
   clear() {
     this.items.set([]);
+    this.saveCart();
+  }
+
+  private saveCart() {
+    const storedItems: StoredCartItem[] = this.items().map((item) => ({
+      productId: item.product.id,
+      option: item.option,
+      quantity: item.quantity,
+    }));
+
+    window.localStorage.setItem('snorf-cart', JSON.stringify(storedItems));
+  }
+
+  private restoreCart() {
+    try {
+      const stored = window.localStorage.getItem('snorf-cart');
+      if (!stored) {
+        return;
+      }
+
+      const parsed: StoredCartItem[] = JSON.parse(stored);
+      const restoredItems = parsed
+        .map((item) => {
+          const product = findProduct(item.productId);
+          if (!product) {
+            return null;
+          }
+          return {
+            id: `${item.productId}:${item.option}`,
+            product,
+            quantity: item.quantity,
+            option: item.option,
+          } as CartItem;
+        })
+        .filter((item): item is CartItem => item !== null);
+
+      if (restoredItems.length) {
+        this.items.set(restoredItems);
+      }
+    } catch {
+      // ignore invalid localStorage data
+    }
   }
 }
