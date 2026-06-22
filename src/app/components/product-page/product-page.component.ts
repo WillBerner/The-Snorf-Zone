@@ -34,7 +34,25 @@ export class ProductPageComponent {
   readonly detailsText = computed(() => {
     const details = this.product?.details ?? '';
     const noteIndex = details.indexOf('NOTE:');
-    return noteIndex === -1 ? details.trim() : details.slice(0, noteIndex).trim();
+    const shippingIndex = details.indexOf('Please allow');
+
+    if (shippingIndex === -1) {
+      return noteIndex === -1 ? details.trim() : details.slice(0, noteIndex).trim();
+    }
+
+    return details.slice(0, shippingIndex).trim();
+  });
+
+  readonly shippingText = computed(() => {
+    const details = this.product?.details ?? '';
+    const noteIndex = details.indexOf('NOTE:');
+    const shippingIndex = details.indexOf('Please allow');
+
+    if (shippingIndex === -1) {
+      return '';
+    }
+
+    return (noteIndex === -1 ? details.slice(shippingIndex) : details.slice(shippingIndex, noteIndex)).trim();
   });
 
   readonly noteText = computed(() => {

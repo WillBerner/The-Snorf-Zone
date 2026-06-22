@@ -9,6 +9,7 @@
       <p class="price">$ {{ selectedPrice().toFixed(2) }}</p>
       <p class="description">{{ product.description }}</p>
       <p class="details">{{ detailsText() }}</p>
+      <p class="details" *ngIf="shippingText()">{{ shippingText() }}</p>
       <div class="embroidered-option">
         <p class="option-label">Product option</p>
         <div class="option-buttons" role="radiogroup" aria-label="Product options">
