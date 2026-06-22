@@ -18,11 +18,23 @@ export class ServerService {
       return;
     }
 
+    await new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
+      try {
+        fetch(`${this.backendUrl}/health`, {
+        method: 'GET',
+        signal: AbortSignal.timeout(50000) // 50 second timeout
+      });
+      } catch (error: any) {
+        // Silently fail — this is just a warm-up call
+        console.debug('Server warm-up call did not complete in time', error.message);
+      }
+    });
+
     try {
       this.isWarmed = true;
       const response = await fetch(`${this.backendUrl}/health`, {
         method: 'GET',
-        signal: AbortSignal.timeout(5000) // 5 second timeout
+        signal: AbortSignal.timeout(50000) // 50 second timeout
       });
 
       if (response.ok) {

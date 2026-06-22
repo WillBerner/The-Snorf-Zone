@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ServerService } from './services/server.service';
 
 @Component({
   standalone: true,
   selector: 'home-page',
-  imports: [CommonModule, RouterModule, NgOptimizedImage],
+  imports: [CommonModule, RouterModule],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
