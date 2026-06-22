@@ -1,14 +1,21 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { ServerService } from './services/server.service';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent],
+  selector: 'home-page',
+  imports: [CommonModule, RouterModule, NgOptimizedImage],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
-export class App {
-  protected readonly title = signal('The-Snorf-Zone');
+export class HomeComponent implements OnInit {
+  private readonly serverService = inject(ServerService);
+
+  ngOnInit() {
+    // Warm up the backend server on first page load
+    // This fires as soon as the user lands on the site
+    this.serverService.warmUpServer();
+  }
 }
