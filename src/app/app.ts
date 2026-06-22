@@ -2,15 +2,16 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ServerService } from './services/server.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @Component({
   standalone: true,
-  selector: 'home-page',
-  imports: [CommonModule, RouterModule],
+  selector: 'app-root',
+  imports: [CommonModule, RouterModule, NavbarComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
-export class HomeComponent implements OnInit {
+export class App implements OnInit {
   private readonly serverService = inject(ServerService);
 
   ngOnInit() {

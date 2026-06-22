@@ -1,6 +1,6 @@
 import { APP_INITIALIZER } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { HomeComponent } from './app/app';
+import { App } from './app/app';
 import { ServerService } from './app/services/server.service';
 import { appConfig } from './app/app.config';
  
@@ -23,4 +23,4 @@ export const extendedConfig = {
   ]
 };
 
-bootstrapApplication(HomeComponent, extendedConfig);
+bootstrapApplication(App, extendedConfig);
