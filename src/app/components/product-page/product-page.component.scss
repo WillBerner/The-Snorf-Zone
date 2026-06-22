@@ -54,7 +54,7 @@
 }
 
 .option-label {
-  margin: 0 0 0.5rem;
+  margin: 0 1 0.5rem;
   font-weight: 700;
   color: #1e143f;
 }
@@ -66,11 +66,17 @@
 }
 
 .option-button,
-.primary-button,
+.primary-button {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
 .secondary-link {
   white-space: normal;
   overflow-wrap: anywhere;
   text-align: center;
+  margin: 1rem 0;
 }
 
 .option-button {
