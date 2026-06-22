@@ -61,11 +61,20 @@
 
 .option-buttons {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 0.75rem;
 }
 
+.option-button,
+.primary-button,
+.secondary-link {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
 .option-button {
+  min-width: 0;
   border: 1px solid #c5b8ff;
   border-radius: 999px;
   padding: 0.85rem 1rem;
@@ -83,7 +92,7 @@
 
 .details-note,
 .email-note {
-  margin: 1rem 0 0;
+  margin: 1rem 0;
   line-height: 1.75;
 }
 
@@ -102,6 +111,9 @@
   justify-content: center;
   border-radius: 999px;
   font-weight: 700;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .primary-button {
@@ -111,6 +123,7 @@
   color: white;
   cursor: pointer;
   margin-right: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .secondary-link {
