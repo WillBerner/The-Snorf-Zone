@@ -18,20 +18,12 @@ export class ServerService {
       return;
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000)).then(() => {
-      try {
-        fetch(`${this.backendUrl}/health`, {
-        method: 'GET',
-        signal: AbortSignal.timeout(50000) // 50 second timeout
-      });
-      } catch (error: any) {
-        // Silently fail — this is just a warm-up call
-        console.debug('Server warm-up call did not complete in time', error.message);
-      }
-    });
+    this.isWarmed = true;
+    void this.triggerWarmUp();
+  }
 
+  private async triggerWarmUp(): Promise<void> {
     try {
-      this.isWarmed = true;
       const response = await fetch(`${this.backendUrl}/health`, {
         method: 'GET',
         signal: AbortSignal.timeout(50000) // 50 second timeout
@@ -40,10 +32,8 @@ export class ServerService {
       if (response.ok) {
         console.log('✅ Server warmed up');
       }
-    } catch (error: any) {
-      // Silently fail — this is just a warm-up call
-      // Don't notify the user or clutter logs
-      if (error.name !== 'AbortError') {
+    } catch (error: unknown) {
+      if (error instanceof Error && error.name !== 'AbortError') {
         console.debug('Server warm-up call did not complete in time', error.message);
       }
     }
