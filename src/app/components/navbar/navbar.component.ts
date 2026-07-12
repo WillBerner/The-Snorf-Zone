@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../services/cart.service';
@@ -8,7 +8,8 @@ import { CartService } from '../../services/cart.service';
   selector: 'snorf-navbar',
   imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
   private readonly cartService = inject(CartService);
