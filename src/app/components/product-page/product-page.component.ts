@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { CartService, CartOption } from '../../services/cart.service';
@@ -9,7 +9,8 @@ import { findProduct } from '../../data/product-data';
   selector: 'product-page',
   imports: [CommonModule, RouterLink, NgOptimizedImage],
   templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.scss']
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrls: ['./product-page.component.scss'],
 })
 export class ProductPageComponent {
   private readonly route = inject(ActivatedRoute);
@@ -27,8 +28,8 @@ export class ProductPageComponent {
     return option === 'embroidered'
       ? this.product.price
       : option === 'printed'
-      ? Math.max(this.product.price - 10, 0)
-      : Math.max(this.product.price - 20, 0);
+        ? Math.max(this.product.price - 10, 0)
+        : Math.max(this.product.price - 20, 0);
   });
 
   readonly detailsText = computed(() => {
@@ -52,7 +53,9 @@ export class ProductPageComponent {
       return '';
     }
 
-    return (noteIndex === -1 ? details.slice(shippingIndex) : details.slice(shippingIndex, noteIndex)).trim();
+    return (
+      noteIndex === -1 ? details.slice(shippingIndex) : details.slice(shippingIndex, noteIndex)
+    ).trim();
   });
 
   readonly noteText = computed(() => {
@@ -60,7 +63,7 @@ export class ProductPageComponent {
     const noteIndex = details.indexOf('NOTE:');
     return noteIndex === -1 ? '' : details.slice(noteIndex).trim();
   });
-  
+
   setOption(option: CartOption) {
     this.selectedOption.set(option);
   }

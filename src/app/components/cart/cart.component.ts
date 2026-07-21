@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartService, CartOption } from '../../services/cart.service';
@@ -8,7 +8,8 @@ import { CartService, CartOption } from '../../services/cart.service';
   selector: 'cart-page',
   imports: [CommonModule, RouterLink],
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
   private readonly cartService = inject(CartService);
@@ -38,17 +39,20 @@ export class CartComponent {
           item.option === 'embroidered'
             ? item.product.price
             : item.option === 'printed'
-            ? Math.max(item.product.price - 10, 0)
-            : Math.max(item.product.price - 20, 0),
-        description: `${item.product.title} (${item.option === 'embroidered' ? 'Embroidered' : item.option === 'printed' ? 'Printed' : 'Color flaw'})`
+              ? Math.max(item.product.price - 10, 0)
+              : Math.max(item.product.price - 20, 0),
+        description: `${item.product.title} (${item.option === 'embroidered' ? 'Embroidered' : item.option === 'printed' ? 'Printed' : 'Color flaw'})`,
       }));
 
       // Call backend
-      const response = await fetch('https://snorf-zone-backend.onrender.com/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lineItems })
-      });
+      const response = await fetch(
+        'https://snorf-zone-backend.onrender.com/api/create-checkout-session',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lineItems }),
+        },
+      );
 
       const data = await response.json();
 
