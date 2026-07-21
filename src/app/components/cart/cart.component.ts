@@ -60,11 +60,11 @@ export class CartComponent {
         // Redirect to Stripe hosted checkout
         window.location.href = data.sessionUrl;
       } else {
-        this.checkoutMessage = data.error || 'Failed to initiate checkout.';
+        this.checkoutMessage = data.error || 'Sorry, our server can sometimes be a bit slow taking new checkout requests. Please try again in a few seconds.';
       }
     } catch (error: any) {
       console.error(error);
-      this.checkoutMessage = 'Error initiating checkout. Please try again.';
+      this.checkoutMessage = 'Sorry, our server can sometimes be a bit slow taking new checkout requests. Please try again in a few seconds.';
     } finally {
       this.isLoading = false;
     }
