@@ -45,8 +45,8 @@ export const PRODUCTS: Product[] = [
     id: 'rose-girl',
     title: 'Rose Girl',
     price: 60.0,
-    description: 'A rosy plush with botanical details and bright pink hair for a bold collector display.',
-    details: 'No matter what, this rosy girl will find her way! 16cm tall and handmade with soft minky, buyers can choose from a plush with an embroidered face or a printed face. Please allow 1-2 weeks for shipping; domestic shipping time is usually under one week while International shipping times can vary. NOTE: This product was made in a household with dogs. Also, as these are handmade, they may not be identical to the one pictured. ',
+    description: 'No matter what, this rosy girl will find her way!',
+    details: '16cm tall and handmade with soft minky, buyers can choose from a plush with an embroidered face or a printed face. Please allow 1-2 weeks for shipping; domestic shipping time is usually under one week while International shipping times can vary. NOTE: This product was made in a household with dogs. Also, as these are handmade, they may not be identical to the one pictured. ',
     hero: 'assets/images/rose-girl/Rose-Girl-1.jpg',
     images: [
       'assets/images/rose-girl/Rose-Girl-1.jpg',
