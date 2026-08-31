@@ -36,7 +36,7 @@ export class ContactComponent {
         {
           from_name: this.contactForm.value.name,
           reply_to: this.contactForm.value.email,
-          message: this.contactForm.value.message,
+          message: `New message from ${this.contactForm.value.name} at ${this.contactForm.value.email}: ${this.contactForm.value.message}`
         },
         'mhYYK-GTia4KMXKPZ',
       );
