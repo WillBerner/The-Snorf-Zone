@@ -3,6 +3,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PlushiesComponent } from './components/plushies/plushies.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { CartComponent } from './components/cart/cart.component';
+import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
@@ -11,6 +12,7 @@ export const routes: Routes = [
   { path: 'plushies', component: PlushiesComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'order-confirmation', component: OrderConfirmationComponent },
   { path: 'product/:id', component: ProductPageComponent },
   { path: '**', component: NotFoundComponent }
 ];

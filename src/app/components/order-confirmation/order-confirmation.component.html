@@ -1,0 +1,51 @@
+<section class="confirmation-page">
+  <div class="confirmation-card" aria-live="polite">
+    <p class="eyebrow">The Snorf Zone</p>
+
+    <div *ngIf="isLoading" class="message">
+      <h1>Checking your order...</h1>
+      <p>Please wait while we confirm your payment with Stripe.</p>
+    </div>
+
+    <div *ngIf="!isLoading && errorMessage" class="message">
+      <h1>We could not load your order</h1>
+      <p>{{ errorMessage }}</p>
+      <a routerLink="/" class="home-link">Return to the shop</a>
+    </div>
+
+    <div *ngIf="!isLoading && session && !errorMessage" class="message">
+      <ng-container *ngIf="isPaid; else paymentPending">
+        <h1>Thank you for your order!</h1>
+        <p>Your payment was successful. We appreciate your support.</p>
+      </ng-container>
+
+      <ng-template #paymentPending>
+        <h1>Your payment is processing</h1>
+        <p>Stripe has not confirmed the payment yet. Please check back shortly before placing another order.</p>
+      </ng-template>
+
+      <dl class="order-details">
+        <div>
+          <dt>Order</dt>
+          <dd>{{ session.id }}</dd>
+        </div>
+        <div *ngIf="session.customer_email">
+          <dt>Email</dt>
+          <dd>{{ session.customer_email }}</dd>
+        </div>
+        <div *ngIf="formatTotal()">
+          <dt>Total</dt>
+          <dd>{{ formatTotal() }}</dd>
+        </div>
+      </dl>
+
+      <ul *ngIf="session.line_items.length" class="order-items">
+        <li *ngFor="let item of session.line_items">
+          {{ item.description || 'Item' }} <span>× {{ item.quantity }}</span>
+        </li>
+      </ul>
+
+      <a routerLink="/" class="home-link">Continue shopping</a>
+    </div>
+  </div>
+</section>
